@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Medical Imaging Processing for Study</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static './css/main.css' %}" />
+    <script src="{% static './js/preview.js' %}"></script>
 </head>
 <body>
+    <div class="page">
+        <header>
+            <h2>
+                Medical Imaging <br>
+                Processing for Study
+            </h2>
+            <nav>
+                <ul>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">Donate</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);"/>
+    <div id="image_container"></div>
     
 </body>
+
 </html>
