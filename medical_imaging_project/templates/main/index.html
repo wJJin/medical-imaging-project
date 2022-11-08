@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" type="text/css" href="{% static './css/main.css' %}" />
     <script src="{% static './js/preview.js' %}"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <div class="page">
@@ -24,11 +25,74 @@
                 </ul>
             </nav>
         </header>
-    </div>
+        <form id="uploadForm" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);"/> -->
+            <input type="file" id="dicomInput" accept=".dcm">
+        </form>
+            <!-- <input type="submit" onclick="show_img()"> -->
+         <buttom onclick="show_img()" type="button">dd</buttom>
 
-    <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);"/>
-    <div id="image_container"></div>
+
+        <div id="image_container"></div>
+    </div>
+    <img id="img" src="">
     
 </body>
+<script>
+    function show_img(){
+        const dicomInput = $("#dicomInput")[0];
+        // console.log("dicomInput: ", dicomInput.files)
+
+        if(dicomInput.files.length === 0){
+            alert("Please select a file");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("dicom_file", dicomInput.files[0]);
+
+        // for (var key of formData.keys()) {
+        //     console.log(key);
+        // }
+        // for (var value of formData.values()) {
+        //     console.log(value);
+        // }
+
+        $.ajax({
+            headers: {'X-CSRFToken': '{{ csrf_token }}'},
+            type:"POST",
+            url: "show_img",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(rtn){
+                console.log("data:image/png;base64,"+"aaa")
+                document.getElementById('img').src = "data:image/png;base64,"+rtn["dicom_image"];
+                $('#img').load(location.href + '#img')
+            },
+            err: function(err){
+                console.log("err:", err)
+            }
+  })
+
+
+
+        
+        // $.ajax({
+        //     url:'show_img',
+        //     type: 'GET',
+        //     enctype: 'multipart/form-data',
+        //     data: {
+        //         'input_val': input_val.value
+        //     },
+        //     datatype:'json',
+        //     success: function(data){
+        //         console.log(data['img'])
+        //     }
+        // })
+        // console.log("end")
+    }
+</script>
 
 </html>
