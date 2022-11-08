@@ -8,7 +8,7 @@
     <title>Medical Imaging Processing for Study</title>
 
     <link rel="stylesheet" type="text/css" href="{% static './css/main.css' %}" />
-    <script src="{% static './js/preview.js' %}"></script>
+    <script src="{% static './js/resize.js' %}"></script>
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -28,16 +28,12 @@
         <form id="uploadForm" enctype="multipart/form-data">
             {% csrf_token %}
             <!-- <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);"/> -->
-            <input type="file" id="dicomInput" accept=".dcm">
+            <input type="file" id="dicomInput" accept=".dcm" onchange="show_img()">
         </form>
-            <!-- <input type="submit" onclick="show_img()"> -->
-         <buttom onclick="show_img()" type="button">dd</buttom>
-
-
-        <div id="image_container"></div>
+        <div class="pre_dicom">
+            <img id="img" src="">
+        </div>
     </div>
-    <img id="img" src="">
-    
 </body>
 <script>
     function show_img(){
@@ -74,24 +70,9 @@
             err: function(err){
                 console.log("err:", err)
             }
-  })
+        })
 
-
-
-        
-        // $.ajax({
-        //     url:'show_img',
-        //     type: 'GET',
-        //     enctype: 'multipart/form-data',
-        //     data: {
-        //         'input_val': input_val.value
-        //     },
-        //     datatype:'json',
-        //     success: function(data){
-        //         console.log(data['img'])
-        //     }
-        // })
-        // console.log("end")
+        resize()
     }
 </script>
 
