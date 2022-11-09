@@ -9,6 +9,17 @@ a:hover {color: black; text-decoration: underline;}
     width: 1440px;
     margin: 0 auto;
 }
+.title {
+	height: 32px;
+	margin-top: 32px;
+	margin-left: 16px;
+	margin-bottom: 16px;
+}
+.exp {
+	margin-left: 72px;
+	opacity: 0.8;
+	font-size: 12px;
+}
 
 header {
     width: 100%;
@@ -28,8 +39,8 @@ header > h2 {
 }
 
 header > nav {
-	margin-right:48px;
-	width:196px;
+	margin-right:56px;
+	width:256px;
 	height:100%;
 }
 
@@ -48,7 +59,104 @@ header ul > li {
 }
 
 .pre_dicom {
+	float: left;
+	margin-left: 24px;
+	margin-right: 112px;
 	width : 480px;
 	height: 480px;
 	background-color: #d3d3d3;
+}
+
+.post_dicom {
+	float: left;
+	margin-left: 112px;
+	width : 480px;
+	height: 480px;
+	background-color: #d3d3d3;
+}
+
+
+#arrowAnim {
+	width: 208px;
+	height: 208px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	float: left;
+}
+  
+.arrow {
+	width: 16px;
+	height: 16px;
+	border: 8px solid;
+	border-color: black transparent transparent black;
+	transform: rotate(135deg);
+}
+  
+.arrowSliding {
+	position: absolute;
+	-webkit-animation: slide 4s linear infinite; 
+	animation: slide 4s linear infinite;
+}
+
+.delay1 {
+	-webkit-animation-delay: 1s; 
+	animation-delay: 1s;
+}
+
+.delay2 {
+	-webkit-animation-delay: 2s; 
+	animation-delay: 2s;
+}
+
+.delay3 {
+	-webkit-animation-delay: 3s; 
+	animation-delay: 3s;
+}
+  
+@-webkit-keyframes slide {
+	  0% { opacity:0; transform: translateX(48px); }  
+	 20% { opacity:1; transform: translateX(28.8px); } 
+	 80% { opacity:1; transform: translateX(-28.8px); }  
+	100% { opacity:0; transform: translateX(-48px); } 
+}
+@keyframes slide {
+	  0% { opacity:0; transform: translateX(48px); }  
+	 20% { opacity:1; transform: translateX(28.8px); } 
+	 80% { opacity:1; transform: translateX(-28.8px); }  
+	100% { opacity:0; transform: translateX(-480x); } 
+}
+
+
+.filebox .upload-name {
+    display: inline-block;
+	width: 296px;
+    height: 32px;
+    padding: 0 10px;
+    vertical-align: middle;
+	margin-top: 16px;
+	margin-left: 32px;
+    border: 1px solid #dddddd;
+    color: #999999;
+}
+.filebox label {
+    display: inline-block;
+	margin-top: 16px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 32px;
+	width: 128px;
+    margin-left: 12px;
+	text-align: center;
+	line-height : 32px;
+}
+.filebox input[type="file"] {
+    position: absolute;
+	overflow: hidden;
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: 0;
 }
