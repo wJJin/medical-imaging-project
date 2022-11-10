@@ -8,10 +8,12 @@
     <title>Medical Imaging Processing for Study</title>
 
     <link rel="stylesheet" type="text/css" href="{% static './css/main.css' %}" />
-    <script src="{% static './js/resize.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static './css/sidebar.css' %}" />
+    <script src="{% static './js/sidebar.js' %}"></script>
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
+    <div class="overlay"></div>
     <div class="page">
         <header>
             <h2>
@@ -22,9 +24,14 @@
                 <ul>
                     <li><a href="">Contact</a></li>
                     <li><a href="">Donate</a></li>
-                    <li><a href="">More</a></li>
+                    <li><a id="sidebarCollapse">More</a></li>
                 </ul>
             </nav>
+
+            <nav id="sidebar">
+
+            </nav>
+
         </header>
 
         <div class="title">
@@ -36,6 +43,9 @@
         </div>
 
         <div class="pre_dicom">
+            <div class="pre_dicom-text">
+				<p>UPLOAD YOUR DICOM IMAGE</p>
+			</div>
             <img id="pre_img" src="">
         </div>
 
@@ -72,6 +82,13 @@
             <div class="arrowSliding delay3">
               <div class="arrow"></div>
             </div>
+
+            <div class="container" style="margin-top: 256px;">
+                <div class="row">
+                    dd
+                    <div class="col-md-3">Div 1</div>
+                </div>
+            </div>
         </div>
 
         <div class="post_dicom">
@@ -88,6 +105,7 @@
                 <!-- <input type="file" id="file"> -->
             </div>
         </form>
+        <button type="button" id="add" class="btn btn-primary">Click me!</button>
     </div>
 </body>
 <script>
@@ -121,6 +139,8 @@
                 console.log("data:image/png;base64,"+"aaa")
                 document.getElementById('pre_img').src = "data:image/png;base64,"+rtn["dicom_image"];
                 $('#pre_img').load(location.href + '#pre_img')
+
+                $(".pre_dicom-text").hide();
             },
             err: function(err){
                 console.log("err:", err)
@@ -133,7 +153,21 @@
         // var fileName = $("#dicomInput").val();
         var fileName = document.getElementById("dicomInput").files[0].name;
         $(".upload-name").val(fileName);
-        });
+    });
+
+    $("#sidebarCollapse").on("click", function () {
+        $("#sidebar").addClass("active");
+        $(".overlay").fadeIn();
+    });
+
+    $(".overlay").on("click", function () {
+        $("#sidebar").removeClass("active");
+        $(".overlay").fadeOut();
+    });
+
+    $('#add').click(function(){
+        $('.container .row').append('<div class="col-xs-3 col-sm-3 col-md-3">Div 1</div>');
+    });
 </script>
 
 </html>
